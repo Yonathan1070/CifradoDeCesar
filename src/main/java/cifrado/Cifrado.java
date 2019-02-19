@@ -46,7 +46,7 @@ public class Cifrado {
                     DesCifrar();
                     break;
                 case "0":
-                    System.exit(0);
+                    finPrograma();
                     break;
                 default:
                     System.out.println("Opcion no válida\n\n");
@@ -68,6 +68,9 @@ public class Cifrado {
         claveCifrado = Integer.parseInt(entradaDatos.readLine());  // Parseamos a int la clave.
         
         for (int i=0;i<texto.length();i++){   //Recorremos el texto hasta el final de la cadena de texto.
+            if(texto.charAt(i) == ' '){ // Verificamos si existe algún espacio en la cadena de caracteres.
+                textoCifrado = textoCifrado.concat(""+"#"); //Reemplazamos el espacio por un numeral.
+            }
             for (int j=0;j<abecedario.length;j++){  //Recorremos el abecedario.
                 if(texto.charAt(i) == abecedario[j]){  //Buscamos caracteres que estén en el texto y en el abecedario.
                     if( (j+claveCifrado) > 25){     //Si la clave es mayor a mi abecedario, inicializamos la cadena del abecedario en el primer carácter.
@@ -96,6 +99,9 @@ public class Cifrado {
         claveDesCifrado = Integer.parseInt(entradaDatos.readLine());  // Parseamos a int la clave.
         
         for (int i=0;i<textoCifrado.length();i++){   //Recorremos el texto hasta el final de la cadena del texto Cifrado.
+            if(textoCifrado.charAt(i) == '#'){ // verificamos si hay un numeral en la cadena de caracteres.
+                textoDesCifrado = textoDesCifrado.concat(""+" "); //reemplazamos el numeral por un espacio.
+            }
             for (int j=0;j<abecedario.length;j++){  //Recorremos el abecedario.
                 if(textoCifrado.charAt(i) == abecedario[j]){  //Buscamos caracteres que estén en el texto y en el abecedario.
                     if( (j-claveDesCifrado) < 0){     //Si la clave es mayor a mi abecedario, inicializamos la cadena del abecedario en el primer carácter.
@@ -109,5 +115,18 @@ public class Cifrado {
             }
         }
         System.out.println("Su texto descifrado es: "+textoDesCifrado+"\n\n");//Mostramos en pantalla la cadena de Texto DesCifrada.
+    }
+    
+    public static void finPrograma(){
+        System.out.println("*´¨) \n" +
+                "¸.•´¸.•*´¨) ¸.•*¨) \n" +
+                "(¸.•´ (¸.•` ¤ Gracias por usar El Cifrado de Cesar \n"
+                + "*´¨) \n" +
+                "¸.•´¸.•*´¨) ¸.•*¨) \n" +
+                "(¸.•´ (¸.•` ¤ Yonathan Bohorquez Rincon\n"
+                + "*´¨) \n" +
+                "¸.•´¸.•*´¨) ¸.•*¨) \n" +
+                "(¸.•´ (¸.•` ¤ Manuel Bohorquez Vega");
+        System.exit(0);
     }
 }
