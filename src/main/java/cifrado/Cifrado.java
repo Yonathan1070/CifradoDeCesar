@@ -6,7 +6,9 @@
 package cifrado;
 
 //Librerías importadas para la ejecución del programa.
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  *
@@ -19,8 +21,38 @@ public class Cifrado {
     
     public static void main(String[] args)throws IOException {
         
-        Cifrar(); // Llamamos el metodo para cifrar.
+        Menu(); // Llamamos el metodo para cifrar.
         
+    }
+    public static void Menu()throws IOException{
+        String opcionMenu;
+        do{
+            System.out.println("+ - - - - - - - - - - - - - - - - - - - - +");
+            System.out.println("|     Bienvenido al Cifrado de Cesar.     |");
+            System.out.println("+ - - - - - - - - - - - - - - - - - - - - +");
+            System.out.println("|                                         |");
+            System.out.println("|   1. Cifrar Texto.                      |");
+            System.out.println("|   2. Descifrar Texto                    |");
+            System.out.println("|   0. Salir.                             |");
+            System.out.println("+ - - - - - - - - - - - - - - - - - - - - +");
+            
+            opcionMenu=entradaDatos.readLine();
+            
+            switch(opcionMenu){
+                case "1":
+                    Cifrar();
+                    break;
+                case "2":
+                    System.out.println("Opcion 2 En progreso...");
+                    break;
+                case "0":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Opcion no válida\n\n");
+                    break;
+            }
+        }while(opcionMenu != "0");
     }
     public static void Cifrar()throws IOException{
         
@@ -36,18 +68,18 @@ public class Cifrado {
         claveCifrado = Integer.parseInt(entradaDatos.readLine());  // Parseamos a int la clave.
         
         for (int i=0;i<texto.length();i++){   //Recorremos el texto hasta el final de la cadena de texto.
-            for (int j=0;j<abecedario.length-1;j++){  //Recorremos el abecedario.
+            for (int j=0;j<abecedario.length;j++){  //Recorremos el abecedario.
                 if(texto.charAt(i) == abecedario[j]){  //Buscamos caracteres que estén en el texto y en el abecedario.
-                    if( (j+claveCifrado) >= 26){     //Si la clave es mayor a mi abecedario, inicializamos la cadena del abecedario en el primer carácter.
+                    if( (j+claveCifrado) > 25){     //Si la clave es mayor a mi abecedario, inicializamos la cadena del abecedario en el primer carácter.
                         int temp =  j+claveCifrado; //Suma claves temporales.
                         int tmp = temp-26;
                         textoCifrado = textoCifrado.concat(""+abecedario[tmp]);//Creamos la nueva cadena de texto cifrada.
                     }else{
-                        textoCifrado = textoCifrado.concat(""+abecedario[j+claveCifrado]); //Creamos ña cadena de texto cifrada.
+                        textoCifrado = textoCifrado.concat(""+abecedario[j+claveCifrado]); //Creamos la cadena de texto cifrada.
                     }
                 }
             }
         }
-        System.out.println("Su texto cifrada es: "+textoCifrado);//Mostramos en pantalla la cadena de Texto cifrada.
+        System.out.println("Su texto cifrado es: "+textoCifrado+"\n\n");//Mostramos en pantalla la cadena de Texto cifrada.
     }
 }
