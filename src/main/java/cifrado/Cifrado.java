@@ -43,7 +43,7 @@ public class Cifrado {
                     Cifrar();
                     break;
                 case "2":
-                    System.out.println("Opcion 2 En progreso...");
+                    DesCifrar();
                     break;
                 case "0":
                     System.exit(0);
@@ -71,9 +71,9 @@ public class Cifrado {
             for (int j=0;j<abecedario.length;j++){  //Recorremos el abecedario.
                 if(texto.charAt(i) == abecedario[j]){  //Buscamos caracteres que estén en el texto y en el abecedario.
                     if( (j+claveCifrado) > 25){     //Si la clave es mayor a mi abecedario, inicializamos la cadena del abecedario en el primer carácter.
-                        int temp =  j+claveCifrado; //Suma claves temporales.
-                        int tmp = temp-26;
-                        textoCifrado = textoCifrado.concat(""+abecedario[tmp]);//Creamos la nueva cadena de texto cifrada.
+                        int claveTemporal =  j+claveCifrado; //Suma claves temporales.
+                        int claveFinal = claveTemporal-26;
+                        textoCifrado = textoCifrado.concat(""+abecedario[claveFinal]);//Creamos la nueva cadena de texto cifrada.
                     }else{
                         textoCifrado = textoCifrado.concat(""+abecedario[j+claveCifrado]); //Creamos la cadena de texto cifrada.
                     }
@@ -81,5 +81,33 @@ public class Cifrado {
             }
         }
         System.out.println("Su texto cifrado es: "+textoCifrado+"\n\n");//Mostramos en pantalla la cadena de Texto cifrada.
+    }
+    
+    public static void DesCifrar()throws IOException{
+        char [] abecedario =
+        {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        String textoDesCifrado="";
+        int claveDesCifrado=0;
+        
+        System.out.println("Digite el texto cifrado: ");
+        String textoCifrado = entradaDatos.readLine();  // Recibimos el texto.
+        textoCifrado = textoCifrado.toLowerCase();    // Pasamos el texto a minusculas.
+        System.out.println("Digite la clave que usó para cifrar el texto:");  // Solicitamos la clave de Cifrado.
+        claveDesCifrado = Integer.parseInt(entradaDatos.readLine());  // Parseamos a int la clave.
+        
+        for (int i=0;i<textoCifrado.length();i++){   //Recorremos el texto hasta el final de la cadena del texto Cifrado.
+            for (int j=0;j<abecedario.length;j++){  //Recorremos el abecedario.
+                if(textoCifrado.charAt(i) == abecedario[j]){  //Buscamos caracteres que estén en el texto y en el abecedario.
+                    if( (j-claveDesCifrado) < 0){     //Si la clave es mayor a mi abecedario, inicializamos la cadena del abecedario en el primer carácter.
+                        int claveTemporal =  j-claveDesCifrado; //Suma claves temporales.
+                        int claveFinal = claveTemporal+26;
+                        textoDesCifrado = textoDesCifrado.concat(""+abecedario[claveFinal]);//Creamos la nueva cadena de texto cifrada.
+                    }else{
+                        textoDesCifrado = textoDesCifrado.concat(""+abecedario[j-claveDesCifrado]); //Creamos la cadena de texto cifrada.
+                    }
+                }
+            }
+        }
+        System.out.println("Su texto descifrado es: "+textoDesCifrado+"\n\n");//Mostramos en pantalla la cadena de Texto DesCifrada.
     }
 }
